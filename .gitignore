@@ -1,0 +1,41 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# FAISS indexes (runtime-generated, session-specific)
+data/faiss_stores/
+faiss_indices/
+*.faiss
+*.pkl
+
+# Uploaded documents (runtime)
+uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tests
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# OS
+.DS_Store
+Thumbs.db
