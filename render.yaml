@@ -1,0 +1,32 @@
+services:
+  # ── FastAPI backend ──────────────────────────────────────────────────────
+  - type: web
+    name: multi-agent-backend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false          # set in Render dashboard
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: NVIDIA_API_KEY
+        sync: false          # only needed if using NVIDIA fallback
+
+  # ── Streamlit frontend ───────────────────────────────────────────────────
+  - type: web
+    name: multi-agent-frontend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: >
+      streamlit run ui/app.py
+      --server.port $PORT
+      --server.address 0.0.0.0
+      --server.headless true
+    envVars:
+      - key: API_BASE_URL
+        sync: false          # set to your backend URL, e.g. https://multi-agent-backend.onrender.com

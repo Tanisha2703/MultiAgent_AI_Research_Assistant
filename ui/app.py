@@ -3,6 +3,7 @@
 Run with:
     streamlit run ui/app.py
 """
+import os
 import uuid
 
 import requests
@@ -21,7 +22,7 @@ st.set_page_config(
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
-API_BASE = "http://localhost:8000"
+API_BASE = os.environ.get("API_BASE_URL", "http://localhost:8000").rstrip("/")
 RESEARCH_URL = f"{API_BASE}/research"
 UPLOAD_URL = f"{API_BASE}/upload"
 HEALTH_URL = f"{API_BASE}/health"
